@@ -1,5 +1,5 @@
-import { Banner } from 'src/banners/banners.entity'
-import { Guarantee_Pity_System } from 'src/guarantee-pity-system/guarantee_pity_system.entity'
+import { Banner } from '../banners/banner.entity'
+import { Guarantee_Pity_System } from '../guarantee_pity_system/guarantee_pity_system.entity'
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn } from 'typeorm'
 
 @Entity('Banner_Pity_System')

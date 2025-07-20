@@ -1,6 +1,6 @@
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany, ManyToOne, JoinColumn } from 'typeorm'
-import { Game } from '../games/games.entity'
-import { Banner_Character } from 'src/banner_characters/banner_characters.entity'
+import { Game } from '../games/game.entity'
+import { Banner_Character } from '../banner_characters/banner_character.entity'
 
 @Entity('Game_Character')
 export class Game_Character {

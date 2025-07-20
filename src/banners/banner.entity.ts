@@ -1,7 +1,7 @@
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany, ManyToOne, JoinColumn } from 'typeorm'
-import { Game } from '../games/games.entity'
-import { Banner_Character } from 'src/banner_characters/banner_characters.entity';
-import { Banner_Pity_System } from 'src/banner-pity-systems/banner_pity_system.entity';
+import { Game } from '../games/game.entity'
+import { Banner_Character } from '../banner_characters/banner_character.entity';
+import { Banner_Pity_System } from '../banner_pity_systems/banner_pity_system.entity';
 
 @Entity('Banner')
 export class Banner {

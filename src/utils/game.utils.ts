@@ -1,6 +1,6 @@
-import { Banner } from "src/banners/banners.entity";
-import { Game_Character } from "src/game-characters/game_character.entity";
-import { Game } from "src/games/games.entity";
+import { Banner } from "src/banners/banner.entity";
+import { Game_Character } from "src/game_characters/game_character.entity";
+import { Game } from "src/games/game.entity";
 
 type TransformedBanner = {
     b_id: number,
@@ -74,7 +74,7 @@ function transformBanners(games_characters: Game_Character[], banners: Banner[])
         // 2 arrays of number, ids of the rateup characters and offrate character of this rarity.
         const bannerCharacterIdMatrix: any = [];
         for (let i = 0; i < base_rate.length; i++) {
-            if (i < soft_pity.length) {
+            if (i < coin_flip_rate.length) {
                 bannerCharacterIdMatrix.push([[],[]]);
             } else {
                 bannerCharacterIdMatrix.push([[]]);
@@ -90,7 +90,7 @@ function transformBanners(games_characters: Game_Character[], banners: Banner[])
         // Rarity that has no rateup characters will get all the characters' ids of that rarity.
         for (const game_character of games_characters) {
             if (game_character.limited == false && !bannerCharacterIdMatrix[banner.highest_rarity-game_character.rarity][0].includes(game_character.gc_id)) {
-                if (banner.highest_rarity-game_character.rarity < soft_pity.length) {
+                if (banner.highest_rarity-game_character.rarity < coin_flip_rate.length) {
                     bannerCharacterIdMatrix[banner.highest_rarity-game_character.rarity][1].push(game_character.gc_id);
                 } else {
                     bannerCharacterIdMatrix[banner.highest_rarity-game_character.rarity][0].push(game_character.gc_id);

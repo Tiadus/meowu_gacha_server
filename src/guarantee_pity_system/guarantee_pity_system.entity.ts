@@ -1,5 +1,5 @@
-import { Banner_Pity_System } from 'src/banner-pity-systems/banner_pity_system.entity'
-import { DecimalTransformer } from 'src/utils/decimal.transformer'
+import { Banner_Pity_System } from '../banner_pity_systems/banner_pity_system.entity'
+import { DecimalTransformer } from '../utils/decimal.transformer'
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm'
 
 @Entity('Guarantee_Pity_System')

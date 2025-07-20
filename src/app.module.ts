@@ -1,16 +1,13 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
-
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { GamesModule } from './games/games.module';
-import { Game } from './games/games.entity';
-import { Game_Character } from './game-characters/game_character.entity';
-import { Banner } from './banners/banners.entity';
-import { Banner_Character } from './banner_characters/banner_characters.entity';
-import { Guarantee_Pity_System } from './guarantee-pity-system/guarantee_pity_system.entity';
-import { Banner_Pity_System } from './banner-pity-systems/banner_pity_system.entity';
+import { Game } from './games/game.entity';
+import { Game_Character } from './game_characters/game_character.entity';
+import { Banner } from './banners/banner.entity';
+import { Banner_Character } from './banner_characters/banner_character.entity';
+import { Guarantee_Pity_System } from './guarantee_pity_system/guarantee_pity_system.entity';
+import { Banner_Pity_System } from './banner_pity_systems/banner_pity_system.entity';
 
 @Module({
   imports: [
