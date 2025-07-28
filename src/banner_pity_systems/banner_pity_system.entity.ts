@@ -17,4 +17,7 @@ export class Banner_Pity_System {
 
     @Column()
     rarity: number
+
+    @Column()
+    bps_type: string
 }

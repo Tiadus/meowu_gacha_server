@@ -10,12 +10,12 @@ export class GamesController {
     @Get()
     async findAll() {
         const result = await this.gamesService.findAll();
-        return result
+        return {data: result};
     }
 
     @Get(':gameId')
     async findOne(@Param('gameId') gameId: string) {
-        const game = await this.gamesService.findOne(+gameId);
-        return game;
+        const result = await this.gamesService.findOne(+gameId);
+        return {data: result};
     }
 }

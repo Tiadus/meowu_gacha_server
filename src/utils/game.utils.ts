@@ -21,6 +21,7 @@ type TransformedBanner = {
 export type TransformedGame = {
     g_id: number,
     g_name: string,
+    money_per_pull: number,
     image_url: string,
     developer: string,
     introduction: string,
@@ -37,6 +38,8 @@ function transformBanners(games_characters: Game_Character[], banners: Banner[])
         // Sort the pity systems in descending order based on their rarities. Putting highest rarity in the first index position.
         banner.bpss.sort((a, b) => b.rarity - a.rarity);
 
+        const bps_types: string[] = [];
+
         // Elements in base_rate, soft_pity, mid_point, acceleration, coin_flip_rate represent attributes of a specific rarity.
         // The rarity which they represent has the same index position as them.
         // For example, the first element in base_rate[] represents the base rate of the highest rarity.
@@ -51,6 +54,8 @@ function transformBanners(games_characters: Game_Character[], banners: Banner[])
         // For example, if rarity 3 has its soft_pity as 0, then theres no rateup or offrate for characters of this rarity.
         // Therefore, its soft pity is not taken into account in the computation to pick the result of each pull.
         for (const bps of banner.bpss) {
+            bps_types.push(bps.bps_type);
+            
             if (Number(bps.gps.base_rate) != 0) {
                 base_rate.push(Number(bps.gps.base_rate));
             }
@@ -91,7 +96,10 @@ function transformBanners(games_characters: Game_Character[], banners: Banner[])
         for (const game_character of games_characters) {
             if (game_character.limited == false && !bannerCharacterIdMatrix[banner.highest_rarity-game_character.rarity][0].includes(game_character.gc_id)) {
                 if (banner.highest_rarity-game_character.rarity < coin_flip_rate.length) {
-                    bannerCharacterIdMatrix[banner.highest_rarity-game_character.rarity][1].push(game_character.gc_id);
+                    const wanted_character_type = bps_types[banner.highest_rarity-game_character.rarity];
+                    if (wanted_character_type === game_character.c_type || wanted_character_type === 'ALL') {
+                        bannerCharacterIdMatrix[banner.highest_rarity-game_character.rarity][1].push(game_character.gc_id);
+                    }
                 } else {
                     bannerCharacterIdMatrix[banner.highest_rarity-game_character.rarity][0].push(game_character.gc_id);
                 }
@@ -118,9 +126,9 @@ function transformBanners(games_characters: Game_Character[], banners: Banner[])
 export function transformGame(game: Game): TransformedGame {
     const transformedBanners: TransformedBanner[] = transformBanners(game.game_characters, game.banners);
 
-    const { g_id, g_name, image_url, developer, introduction, date_added, last_updated, game_characters } = game;
+    const { g_id, g_name, money_per_pull, image_url, developer, introduction, date_added, last_updated, game_characters } = game;
     const transformedGame: TransformedGame = {
-        g_id, g_name, image_url, developer, introduction, date_added, last_updated, game_characters,
+        g_id, g_name, money_per_pull, image_url, developer, introduction, date_added, last_updated, game_characters,
         banners: transformedBanners
     }
 

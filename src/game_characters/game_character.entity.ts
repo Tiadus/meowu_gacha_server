@@ -18,6 +18,9 @@ export class Game_Character {
     image_url: string
 
     @Column()
+    c_type: string
+
+    @Column()
     rarity: number
 
     @Column()

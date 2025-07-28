@@ -33,12 +33,12 @@ describe('GameController', () => {
     it('should get all games', async () => {
         const result = await controller.findAll();
         expect(service.findAll).toHaveBeenCalled();
-        expect(result).toEqual(mockGames);
+        expect(result.data).toEqual(mockGames);
     })
 
     it('should get 1 game in detail', async () => {
         const result = await controller.findOne('1');
         expect(service.findOne).toHaveBeenCalledWith(1);
-        expect(result).toEqual(mockGames[1])
+        expect(result.data).toEqual(mockGames[1])
     })
 })
